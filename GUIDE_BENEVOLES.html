@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guide bénévole · Prospections Tortues Marines · SHL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ── Variables ── */
+:root {
+  --sea:         #2E86AB;
+  --sea-dark:    #1a6890;
+  --sea-pale:    #e8f4f9;
+  --green:       #27ae60;
+  --green-pale:  #edfaf2;
+  --orange:      #e8a23a;
+  --orange-pale: #fff8ee;
+  --red:         #e05555;
+  --red-pale:    #fff0f0;
+  --gold:        #e8a82a;
+  --gold-pale:   #fffbea;
+  --teal:        #4ECDC4;
+  --wa:          #25d366;
+  --bg:          #f0f5fa;
+  --card:        #ffffff;
+  --text:        #1a2e40;
+  --muted:       #5a7080;
+  --border:      #d8e8f0;
+  --ff:          'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:     #0d1b2a;
+    --card:   #1a2f45;
+    --text:   #d6eaf8;
+    --muted:  #7a9bb5;
+    --border: #253f56;
+    --sea-pale: #0e2438;
+    --green-pale: #0a2016;
+    --orange-pale: #281a04;
+    --red-pale: #280e0e;
+    --gold-pale: #201800;
+  }
+}
+
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--ff);
+  background: #fff;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ════════════════════════════════
+   HÉRO  — pleine largeur
+═══════════════════════════════════ */
+.hero {
+  background: linear-gradient(150deg, #071e2d 0%, #0f3d55 28%, var(--sea-dark) 60%, var(--sea) 100%);
+  color: #fff;
+  padding: 56px 24px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '🐢';
+  position: absolute;
+  font-size: 280px;
+  opacity: .03;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -54%);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-logo {
+  height: 66px;
+  width: auto;
+  border-radius: 12px;
+  background: rgba(255,255,255,.12);
+  padding: 8px 14px;
+  margin: 0 auto 20px;
+  display: block;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 900;
+  margin-bottom: 10px;
+  letter-spacing: -.5px;
+  position: relative;
+  text-shadow: 0 2px 20px rgba(0,0,0,.4);
+}
+
+.hero-turtle {
+  font-size: 60px;
+  line-height: 1;
+  display: block;
+  margin-bottom: 16px;
+  position: relative;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,.4));
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  opacity: .82;
+  max-width: 540px;
+  margin: 0 auto 16px;
+  font-weight: 600;
+  position: relative;
+}
+
+.hero-version {
+  display: inline-block;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 20px;
+  padding: 5px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: .75;
+  position: relative;
+  margin-bottom: 40px;
+  backdrop-filter: blur(4px);
+}
+
+/* Vague identique au template email */
+.hero-wave {
+  display: block;
+  width: 100%;
+  margin-bottom: -1px;
+}
+
+/* ════════════════════════════════
+   NAV STICKY
+═══════════════════════════════════ */
+.toc-wrap {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 2px 14px rgba(0,0,0,.07);
+}
+
+.toc {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 9px 20px;
+  display: flex;
+  gap: 5px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  align-items: center;
+  scrollbar-width: none;
+}
+.toc::-webkit-scrollbar { display: none; }
+
+.toc-label {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.toc a {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-decoration: none;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  transition: all .15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.toc a:hover { background: var(--sea); color: #fff; border-color: var(--sea); }
+
+/* ════════════════════════════════
+   SECTIONS — pleine largeur
+   Chaque chapitre = section pleine
+═══════════════════════════════════ */
+.guide-body { /* pleine largeur, aucune contrainte */ }
+
+.chapter { border-top: 1px solid var(--border); }
+.chapter:first-child { border-top: none; }
+
+/* Fond alternant sur corps de section */
+.chapter:nth-child(even) .chapter-body-wrap { background: var(--bg); }
+
+/* ── Header de chapitre : bande pleine largeur ── */
+.chapter-header {
+  background: linear-gradient(to right, var(--sea-pale) 0%, rgba(232,244,249,.2) 55%, transparent 100%);
+  border-bottom: 1px solid var(--border);
+  border-left: 5px solid var(--sea);
+}
+
+.chapter-header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 22px 32px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.ch-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sea), var(--sea-dark));
+  color: #fff;
+  font-weight: 900;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 3px 12px rgba(46,134,171,.35);
+}
+
+.ch-icon { font-size: 34px; flex-shrink: 0; line-height: 1; }
+
+.chapter-header h2 {
+  font-size: 19px;
+  font-weight: 900;
+  color: var(--sea-dark);
+  line-height: 1.25;
+}
+
+@media (prefers-color-scheme: dark) {
+  .chapter-header h2 { color: var(--teal); }
+  .chapter-header { background: linear-gradient(to right, var(--sea-pale), transparent); }
+}
+
+.chapter-header p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 3px;
+  font-weight: 600;
+}
+
+/* ── Corps de chapitre centré ── */
+.chapter-body-wrap { background: #fff; }
+
+.chapter-body {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 32px;
+}
+
+.chapter-body h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--sea-dark);
+  margin: 28px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (prefers-color-scheme: dark) { .chapter-body h3 { color: var(--teal); } }
+.chapter-body h3:first-child { margin-top: 0; }
+.chapter-body p { margin: 0 0 10px; }
+.chapter-body p:last-child { margin-bottom: 0; }
+
+/* ════════════════════════════════
+   STEPS
+═══════════════════════════════════ */
+.steps { list-style: none; margin: 16px 0; }
+.steps li { display: flex; gap: 16px; margin-bottom: 20px; }
+.steps li:last-child { margin-bottom: 0; }
+
+.step-num {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sea), var(--sea-dark));
+  color: #fff;
+  font-weight: 900;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 12px rgba(46,134,171,.3);
+  margin-top: 1px;
+}
+
+.step-body { flex: 1; }
+.step-body strong { display: block; margin-bottom: 4px; font-size: 15px; font-weight: 800; }
+.step-body p { font-size: 14px; color: var(--muted); margin: 0; font-weight: 600; }
+
+/* ════════════════════════════════
+   INFO BOXES
+═══════════════════════════════════ */
+.info {
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin: 14px 0;
+  font-size: 14px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-weight: 600;
+}
+.info:last-child { margin-bottom: 0; }
+.info-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
+.info-blue   { background: var(--sea-pale);    border-left: 4px solid var(--sea); }
+.info-green  { background: var(--green-pale);  border-left: 4px solid var(--green); }
+.info-orange { background: var(--orange-pale); border-left: 4px solid var(--orange); }
+.info-red    { background: var(--red-pale);    border-left: 4px solid var(--red); }
+.info-gold   { background: var(--gold-pale);   border-left: 4px solid var(--gold); }
+.info-teal   { background: rgba(78,205,196,.08); border-left: 4px solid var(--teal); }
+.info strong { display: block; margin-bottom: 3px; font-weight: 800; }
+
+/* ════════════════════════════════
+   TÉLÉPHONE / MAQUETTE DARK
+═══════════════════════════════════ */
+.phone-mock {
+  background: #0f1e2d;
+  border-radius: 20px;
+  padding: 20px 18px;
+  margin: 18px 0;
+  border: 1px solid #1e3a50;
+}
+
+.mock-bar {
+  background: rgba(255,255,255,.07);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+.mock-bar-icon { font-size: 20px; }
+
+.mock-card {
+  background: rgba(255,255,255,.05);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+.mock-card:last-child { margin-bottom: 0; }
+
+.mock-label {
+  color: rgba(255,255,255,.4);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-bottom: 8px;
+}
+
+.mock-btn {
+  border-radius: 10px;
+  padding: 12px 16px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+.mock-btn:last-child { margin-bottom: 0; }
+
+.btn-sea   { background: linear-gradient(135deg, var(--sea), var(--sea-dark)); color: #fff; }
+.btn-green { background: linear-gradient(135deg, #27ae60, #1e8449); color: #fff; }
+.btn-teal  { background: linear-gradient(135deg, var(--teal), #3ab5ac); color: #fff; }
+.btn-wa    { background: linear-gradient(135deg, var(--wa), #1da851); color: #fff; }
+.btn-ghost { background: rgba(255,255,255,.07); color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.15); }
+
+.mock-stat-grid   { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.mock-stat-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+
+.mock-stat {
+  background: rgba(255,255,255,.06);
+  border-radius: 10px;
+  padding: 10px 6px;
+  text-align: center;
+}
+.mock-stat-val { display: block; font-size: 20px; font-weight: 900; color: #fff; line-height: 1.2; }
+.mock-stat-lbl { display: block; font-size: 10px; color: rgba(255,255,255,.4); margin-top: 3px; font-weight: 600; }
+
+.mock-info { padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+.mock-info-green  { background: rgba(39,174,96,.2);  color: #4caf7d; }
+.mock-info-red    { background: rgba(224,85,85,.2);   color: #ff8a80; }
+.mock-info-orange { background: rgba(232,162,58,.2);  color: #ffc107; }
+.mock-info-blue   { background: rgba(46,134,171,.2);  color: #a8d8f0; }
+
+.mock-tag-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.mock-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.8);
+  font-size: 12px;
+  font-weight: 700;
+}
+.mock-tag-ok      { border-color: rgba(39,174,96,.5); background: rgba(39,174,96,.12);  color: #4caf7d; }
+.mock-tag-suspect { border-color: rgba(232,162,58,.5); background: rgba(232,162,58,.12); color: #ffc107; }
+.mock-tag-turtle  { border-color: rgba(78,205,196,.5); background: rgba(78,205,196,.12); color: var(--teal); }
+
+/* ════════════════════════════════
+   FLOW
+═══════════════════════════════════ */
+.flow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 18px 0; }
+.flow-box {
+  background: var(--sea-pale);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sea-dark);
+}
+@media (prefers-color-scheme: dark) { .flow-box { color: var(--teal); } }
+.flow-arrow { color: var(--sea); font-size: 22px; font-weight: 900; }
+
+/* ════════════════════════════════
+   EMAIL MOCK (avec vraie vague)
+═══════════════════════════════════ */
+.email-mock {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 16px 0;
+  max-width: 560px;
+}
+
+.email-mock-header {
+  background: linear-gradient(135deg, var(--sea), var(--sea-dark));
+  padding: 18px 22px 0;
+}
+
+.email-mock-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 14px;
+}
+
+.email-mock-logo {
+  width: 42px; height: 42px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; flex-shrink: 0;
+}
+
+.email-mock-header-text { color: #fff; font-size: 13px; font-weight: 600; }
+.email-mock-header-text strong { display: block; font-size: 14px; font-weight: 800; margin-bottom: 1px; }
+
+.email-mock-wave { display: block; width: 100%; }
+
+.email-mock-body { padding: 18px 22px; background: #fff; }
+.email-mock-body p { font-size: 13px; margin-bottom: 10px; }
+
+.email-mock-info {
+  background: var(--sea-pale);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px; font-weight: 700;
+  color: var(--sea-dark);
+  margin-bottom: 14px;
+}
+
+.email-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.email-btn {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-size: 12px; font-weight: 800;
+  text-decoration: none;
+}
+.email-btn-sea   { background: var(--sea);   color: #fff; }
+.email-btn-green { background: var(--green); color: #fff; }
+.email-btn-wa    { background: var(--wa);    color: #fff; }
+
+/* ════════════════════════════════
+   BADGES
+═══════════════════════════════════ */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.badge-card { border-radius: 16px; padding: 18px 10px; text-align: center; transition: transform .15s; }
+.badge-card:hover { transform: translateY(-2px); }
+.badge-earned {
+  background: linear-gradient(135deg, #fffbea, #fff8d0);
+  border: 2px solid #e8c040;
+  box-shadow: 0 3px 14px rgba(240,192,64,.18);
+}
+.badge-locked { background: var(--bg); border: 2px solid var(--border); opacity: .48; filter: grayscale(.6); }
+.badge-icon { font-size: 34px; margin-bottom: 8px; display: block; }
+.badge-name { font-size: 11px; font-weight: 800; color: var(--text); line-height: 1.3; }
+.badge-desc { font-size: 10px; color: var(--muted); margin-top: 3px; line-height: 1.3; font-weight: 600; }
+
+/* ════════════════════════════════
+   CONTACTS
+═══════════════════════════════════ */
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 22px;
+  display: flex; align-items: center; gap: 18px;
+  margin-bottom: 10px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.contact-card:hover { border-color: var(--sea); box-shadow: 0 4px 16px rgba(46,134,171,.12); }
+.contact-icon { font-size: 32px; flex-shrink: 0; }
+.contact-name { font-weight: 800; font-size: 14px; }
+.contact-detail { font-size: 13px; color: var(--muted); margin-top: 2px; font-weight: 600; }
+.contact-tel { font-size: 22px; font-weight: 900; color: var(--sea); text-decoration: none; display: block; margin-top: 4px; }
+.contact-tel-red { color: var(--red); }
+
+.contact-action {
+  background: var(--sea); color: #fff;
+  font-weight: 800; font-size: 13px;
+  padding: 10px 20px; border-radius: 10px;
+  text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  transition: all .15s;
+}
+.contact-action:hover { background: var(--sea-dark); transform: translateY(-1px); }
+
+.contact-action-wa {
+  background: var(--wa); color: #fff;
+  font-weight: 800; font-size: 13px;
+  padding: 10px 20px; border-radius: 10px;
+  text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  transition: all .15s;
+}
+.contact-action-wa:hover { background: #1da851; transform: translateY(-1px); }
+
+/* ════════════════════════════════
+   FAQ
+═══════════════════════════════════ */
+.faq-item { border-bottom: 1px solid var(--border); padding: 18px 0; }
+.faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+.faq-q { font-weight: 800; font-size: 15px; display: flex; align-items: flex-start; gap: 12px; }
+.faq-q-mark {
+  flex-shrink: 0; width: 26px; height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sea), var(--sea-dark));
+  color: #fff; font-size: 13px; font-weight: 900;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.faq-a { margin-top: 10px; padding-left: 38px; font-size: 14px; color: var(--muted); font-weight: 600; line-height: 1.7; }
+
+/* ════════════════════════════════
+   CHECKLIST
+═══════════════════════════════════ */
+.checklist { list-style: none; }
+.checklist li {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-size: 14px; font-weight: 600;
+}
+.checklist li:last-child { border-bottom: none; }
+.check-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; line-height: 1; }
+
+/* ════════════════════════════════
+   TIMELINE
+═══════════════════════════════════ */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 10px; top: 8px; bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--green), var(--sea), var(--red));
+  border-radius: 2px;
+}
+.tl-item { position: relative; margin-bottom: 22px; }
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot { position: absolute; left: -27px; top: 4px; width: 14px; height: 14px; border-radius: 50%; border: 2px solid #fff; }
+.tl-label { font-weight: 800; font-size: 14px; margin-bottom: 5px; }
+.tl-text  { font-size: 13px; color: var(--muted); font-weight: 600; line-height: 1.65; }
+
+/* ════════════════════════════════
+   MÉTÉO ALERTE
+═══════════════════════════════════ */
+.wx-alert {
+  background: linear-gradient(135deg, var(--orange-pale), #fff3d4);
+  border: 2px solid var(--orange);
+  border-radius: 14px; padding: 18px 22px; margin: 16px 0;
+}
+.wx-alert-title { font-weight: 800; font-size: 15px; color: #8a5500; display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.wx-alert-body  { font-size: 14px; color: #6a4400; font-weight: 600; line-height: 1.75; }
+@media (prefers-color-scheme: dark) {
+  .wx-alert { background: rgba(232,162,58,.08); border-color: var(--orange); }
+  .wx-alert-title { color: var(--orange); }
+  .wx-alert-body  { color: #c8a060; }
+}
+
+/* ════════════════════════════════
+   TWO-COL
+═══════════════════════════════════ */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 16px 0; }
+
+/* ════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer {
+  text-align: center;
+  padding: 40px 24px;
+  color: var(--muted);
+  font-size: 13px; font-weight: 600;
+  border-top: 1px solid var(--border);
+  background: var(--card);
+}
+footer strong { display: block; margin-bottom: 4px; font-size: 15px; }
+
+.footer-links { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 18px 0 0; }
+.footer-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px; border-radius: 20px;
+  text-decoration: none; font-size: 13px; font-weight: 800;
+  transition: all .15s;
+}
+.footer-link-sea { background: var(--sea-pale); color: var(--sea-dark); border: 1px solid var(--border); }
+.footer-link-sea:hover { background: var(--sea); color: #fff; }
+.footer-link-wa  { background: rgba(37,211,102,.1); color: #1a7a44; border: 1px solid rgba(37,211,102,.3); }
+.footer-link-wa:hover { background: var(--wa); color: #fff; }
+
+/* ════════════════════════════════
+   RESPONSIF
+═══════════════════════════════════ */
+@media (max-width: 680px) {
+  .chapter-header { border-left-width: 3px; }
+  .chapter-header-inner { padding: 0 16px; gap: 12px; }
+  .ch-icon { display: none; }
+  .chapter-body { padding: 24px 16px; }
+  .two-col { grid-template-columns: 1fr; }
+  .mock-stat-grid { grid-template-columns: repeat(2, 1fr); }
+  .badges-grid { grid-template-columns: repeat(3, 1fr); }
+  .contact-card { flex-wrap: wrap; }
+  .email-mock { max-width: 100%; }
+}
+
+@media print {
+  .toc-wrap { display: none; }
+  body { font-size: 13px; background: white; }
+  .chapter-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hero, .phone-mock, .wx-alert { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .chapter { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ HÉRO ══════════════════ -->
+<div class="hero">
+  <img class="hero-logo"
+       src="https://ashl.fr/wp-content/uploads/2025/03/Copie-de-Copie-de-Sans-titre-297-x-210-mm-6-300x212.png"
+       alt="Sauvegarde Hérault Littoral"
+       onerror="this.style.display='none'">
+  <span class="hero-turtle">🐢</span>
+  <h1>Guide du bénévole</h1>
+  <p class="hero-subtitle">
+    Tout ce qu'il faut savoir pour participer aux prospections de tortues marines
+    sur les plages de l'Hérault
+  </p>
+  <span class="hero-version">Sauvegarde Hérault Littoral · Sérignan · v2.1.0</span>
+  <!-- Même vague exacte que le template email (path identique, adapté pleine largeur) -->
+  <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 1200 56" preserveAspectRatio="none" height="56">
+    <path d="M0,28 C150,56 300,0 450,28 C600,56 750,0 900,28 C1050,56 1150,14 1200,28 L1200,56 L0,56 Z" fill="#ffffff"/>
+  </svg>
+</div>
+
+<!-- ══════════════════ NAV ══════════════════ -->
+<div class="toc-wrap">
+  <nav class="toc" aria-label="Navigation du guide">
+    <span class="toc-label">Aller à</span>
+    <a href="#inscription">📅 S'inscrire</a>
+    <a href="#emails">📧 Emails</a>
+    <a href="#meteo">🌩️ Météo</a>
+    <a href="#annulation">❌ Annuler</a>
+    <a href="#terrain">📱 Terrain</a>
+    <a href="#espace">🙋 Mon espace</a>
+    <a href="#badges">🏅 Badges</a>
+    <a href="#attestation">📄 Attestation</a>
+    <a href="#contacts">📞 Contacts</a>
+    <a href="#faq">❓ FAQ</a>
+  </nav>
+</div>
+
+<!-- ══════════════════ CHAPITRES ══════════════════ -->
+<div class="guide-body">
+
+<!-- ════════ 1 ════════ -->
+<section class="chapter" id="inscription">
+  <div class="chapter-header">
+    <div class="chapter-header-inner">
+      <div class="ch-num">1</div>
+      <div class="ch-icon">📅</div>
+      <div>
+        <h2>S'inscrire à une prospection</h2>
+        <p>Depuis le calendrier sur le site de l'association — simple et rapide</p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-body-wrap"><div class="chapter-body">
+
+    <ul class="steps">
+      <li><div class="step-num">1</div><div class="step-body"><strong>Ouvrez le calendrier des prospections</strong><p>Rendez-vous sur la page <em>Planning</em> du site. Trois vues : mois, semaine ou liste. Sur mobile, utilisez la barre de navigation en bas de l'écran.</p></div></li>
+      <li><div class="step-num">2</div><div class="step-body"><strong>Choisissez un créneau disponible</strong><p>Les créneaux complets sont barrés et grisés. Cliquez/tapez sur un créneau libre pour afficher sa fiche détaillée.</p></div></li>
+      <li><div class="step-num">3</div><div class="step-body"><strong>Consultez la fiche du créneau</strong><p>Date, heure, lieu, type, référent, consignes — et la zone de prospection sur carte si elle est définie.</p></div></li>
+      <li><div class="step-num">4</div><div class="step-body"><strong>Remplissez le formulaire d'inscription</strong><p>Prénom, nom, email, téléphone (optionnel), adhésion. Acceptez les consignes puis appuyez sur <em>🐢 S'inscrire à la prospection</em>.</p></div></li>
+      <li><div class="step-num">5</div><div class="step-body"><strong>Email de confirmation reçu</strong><p>Il contient votre lien terrain personnel, un QR code, et tous les liens utiles.</p></div></li>
+    </ul>
+
+    <div class="phone-mock">
+      <div class="mock-info mock-info-blue" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <span>🚶 À pied · <strong>La Maïre</strong> · Sérignan</span>
+        <span style="opacity:.5">✕</span>
+      </div>
+      <div class="mock-card">
+        <div style="color:rgba(255,255,255,.65);font-size:13px;line-height:1.9">
+          📅 Vendredi 27 juin 2026<br>⏰ 07:00 → 09:00<br>
+          <span style="color:#4caf7d;font-weight:700">👥 2 place(s) disponible(s) sur 2</span><br>
+          🧭 Référent : Yann Geshors
+        </div>
+      </div>
+      <div class="mock-card" style="background:rgba(46,134,171,.15);display:flex;justify-content:space-between;align-items:center">
+        <span style="color:#a8d8f0;font-size:13px;font-weight:700">🏖️ Voir la zone de prospection</span>
+        <span style="color:rgba(255,255,255,.4);font-size:12px">▼</span>
+      </div>
+      <div class="mock-btn btn-sea" style="margin-top:8px">✍️ S'inscrire à ce créneau</div>
+    </div>
+
+    <div class="two-col">
+      <div class="info info-blue" style="margin:0"><span class="info-icon">🗺️</span><div><strong>Zone de prospection</strong>Le bouton "Voir la zone" affiche le secteur exact sur carte interactive. Consultez-le avant l'inscription.</div></div>
+      <div class="info info-orange" style="margin:0"><span class="info-icon">⏳</span><div><strong>Créneau complet ?</strong>Inscrivez-vous quand même — liste d'attente automatique. 24h pour confirmer si une place se libère.</div></div>
+    </div>
+
+  </div></div>
+</section>
+
+<!-- ════════ 2 ════════ -->
+<section class="chapter" id="emails">
+  <div class="chapter-header">
+    <div class="chapter-header-inner">
+      <div class="ch-num">2</div>
+      <div class="ch-icon">📧</div>
+      <div>
+        <h2>Les emails que vous recevez</h2>
+        <p>Tout est automatique — pensez à vérifier vos spams !</p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-body-wrap"><div class="chapter-body">
+
+    <h3>✅ Confirmation d'inscription</h3>
+    <p>Envoyé immédiatement. Il contient votre lien terrain, un QR code, et tous les boutons utiles.</p>
+
+    <div class="email-mock">
+      <div class="email-mock-header">
+        <div class="email-mock-top">
+          <div class="email-mock-logo">🐢</div>
+          <div class="email-mock-header-text">
+            <strong>[Tortues SHL] Confirmation – Prospection du 27/06</strong>
+            De : Sauvegarde Hérault Littoral
+          </div>
+        </div>
+        <svg class="email-mock-wave" xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 600 30" preserveAspectRatio="none" height="28">
+          <path d="M0,15 C100,30 200,0 300,15 C400,30 500,0 600,15 L600,30 L0,30 Z" fill="#ffffff"/>
+        </svg>
+      </div>
+      <div class="email-mock-body">
+        <p>Bonjour <strong>Prénom</strong>, votre inscription est confirmée !</p>
+        <div class="email-mock-info">📅 Vendredi 27 juin · 07:00 · La Maïre, Sérignan</div>
+        <div class="email-btns">
+          <span class="email-btn email-btn-sea">🐢 Formulaire terrain</span>
+          <span class="email-btn email-btn-sea">👤 Mon espace</span>
+          <span class="email-btn email-btn-wa">💬 WhatsApp</span>
+          <span class="email-btn email-btn-sea">📖 Guide</span>
+        </div>
+        <p style="font-size:11px;color:var(--muted);margin-bottom:0">Ce lien est personnel – ne le partagez pas · <span style="color:var(--red)">Annuler mon inscription</span></p>
+      </div>
+    </div>
+
+    <h3>🔔 Rappel J-1</h3>
+    <p>La veille de la prospection, un email de rappel vous envoie le récapitulatif complet (heure, lieu, référent, point de RDV) et votre lien terrain.</p>
+
+    <h3>🎉 Place libérée (liste d'attente)</h3>
+    <p>Si vous étiez en attente et qu'une place se libère, vous avez <strong>24 heures</strong> pour confirmer via le lien — sans réponse, la place est proposée au suivant.</p>
+
+    <h3>❌ Annulation météo</h3>
+    <p>Si l'association annule un créneau pour raisons météo, vous recevez un email automatique. Votre inscription est supprimée sans action de votre part.</p>
+
+    <div class="info info-orange">
+      <span class="info-icon">📌</span>
+      <div><strong>Conservez votre lien terrain</strong> Le formulaire terrain dans l'email est votre outil de prospection personnel. Ouvrez-le <em>avant de partir</em>, pendant que vous avez du réseau.</div>
+    </div>
+
+  </div></div>
+</section>
+
+<!-- ════════ 3 ════════ -->
+<section class="chapter" id="meteo">
+  <div class="chapter-header">
+    <div class="chapter-header-inner">
+      <div class="ch-num">3</div>
+      <div class="ch-icon">🌩️</div>
+      <div>
+        <h2>Annulation pour conditions météo</h2>
+        <p>Votre sécurité avant tout — le système surveille la météo automatiquement</p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-body-wrap"><div class="chapter-body">
+
+    <p>Chaque matin, le système consulte les prévisions météo pour tous les créneaux à venir. Si des conditions dangereuses sont détectées, l'association en est alertée et peut annuler en un clic.</p>
+
+    <div class="wx-alert">
+      <div class="wx-alert-title">⚠️ Conditions déclenchant une alerte</div>
+      <div class="wx-alert-body">
+        <strong>Orage prévu</strong> — annulation systématiquement recommandée<br>
+        <strong>Vent ≥ 50 km/h</strong> — seuil configurable par l'association<br>
+        <strong>Précipitations ≥ 20 mm</strong> — seuil configurable par l'association
+      </div>
+    </div>
+
+    <div class="phone-mock">
+      <div class="mock-info mock-info-red" style="font-weight:800;font-size:14px">❌ Créneau annulé – Conditions météo</div>
+      <div class="mock-card">
+        <div style="color:rgba(255,255,255,.65);font-size:13px;line-height:1.85">
+          📅 Vendredi 27 juin · La Maïre, Sérignan<br>
+          <span style="color:#ffc107;font-weight:700">⚠️ Motif : Orage prévu (code météo 95+)</span><br>
+          <span style="font-size:12px;opacity:.7">Votre inscription est automatiquement annulée.</span>
+        </div>
+      </div>
+      <div class="mock-btn btn-sea" style="margin-top:8px">📅 Voir le planning</div>
+    </div>
+
+    <div class="two-col">
+      <div class="info info-green" style="margin:0"><span class="info-icon">✅</span><div><strong>Entièrement automatique</strong>Aucune action requise. L'email arrive directement et l'inscription est supprimée.</div></div>
+      <div class="info info-blue" style="margin:0"><span class="info-icon">📅</span><div><strong>Se réinscrire</strong>Consultez le planning après l'annulation pour trouver un autre créneau disponible.</div></div>
+    </div>
+
+  </div></div>
+</section>
+
+<!-- ════════ 4 ════════ -->
+<section class="chapter" id="annulation">
+  <div class="chapter-header">
+    <div class="chapter-header-inner">
+      <div class="ch-num">4</div>
+      <div class="ch-icon">❌</div>
+      <div>
+        <h2>Annuler son inscription</h2>
+        <p>Vous n'êtes plus disponible ? Annulez le plus tôt possible</p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-body-wrap"><div class="chapter-body">
+
+    <p>Annuler libère votre place pour un autre bénévole en liste d'attente. Merci de le faire dès que vous le savez !</p>
+
+    <h3>Méthode 1 — Via l'email de confirmation</h3>
+    <p>Dans votre email, cliquez sur <strong>"Annuler mon inscription"</strong>. Une page de confirmation s'affiche — validez l'annulation.</p>
+
+    <div class="flow">
+      <div class="flow-box">Email de confirmation</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">"Annuler" en bas</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Confirmer</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">✅ Place libérée</div>
+    </div>
+
+    <h3>Méthode 2 — Via votre espace bénévole</h3>
+    <p>Espace bénévole → <em>Prochaines prospections</em> → bouton <strong>Annuler</strong> à côté du créneau concerné.</p>
+
+    <div class="info info-red">
+      <span class="info-icon">⏰</span>
+      <div><strong>Annulez à temps !</strong> Prévenez l'association le plus tôt possible. En cas d'empêchement de dernière minute, appelez directement le référent de votre créneau.</div>
+    </div>
+
+  </div></div>
+</section>
+
+<!-- ════════ 5 ════════ -->
+<section class="chapter" id="terrain">
+  <div class="chapter-header">
+    <div class="chapter-header-inner">
+      <div class="ch-num">5</div>
+      <div class="ch-icon">📱</div>
+      <div>
+        <h2>Le formulaire terrain</h2>
+        <p>Votre outil de prospection sur smartphone — ouvrez le lien depuis l'email</p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-body-wrap"><div class="chapter-body">
+
+    <div class="info info-orange">
+      <span class="info-icon">📲</span>
+      <div><strong>Ouvrez le lien avant de partir !</strong> Le formulaire terrain est dans votre email de confirmation. Ouvrez-le à la maison, pendant qu'il y a du réseau. Une fois chargé, il fonctionne même hors connexion.</div>
+    </div>
+
+    <h3>🏖️ Zone de prospection</h3>
+    <p>En haut du formulaire, la section <strong>Zone de prospection</strong> affiche le secteur exact sur carte interactive.</p>
+
+    <div class="phone-mock">
+      <div class="mock-bar">
+        <span class="mock-bar-icon">🏖️</span>
+        <div><div style="font-weight:800">Zone de prospection</div><div style="font-size:11px;opacity:.5">La Maïre · Sérignan</div></div>
+        <span style="margin-left:auto;opacity:.4">▼</span>
+      </div>
+      <div class="mock-card" style="height:70px;display:flex;align-items:center;justify-content:center;background:rgba(46,134,171,.12)">
+        <span style="color:rgba(255,255,255,.4);font-size:12px;text-align:center">🗺️ Carte du secteur<br><span style="font-size:10px">Zone bleue · Point RDV vert</span></span>
+      </div>
+    </div>
+
+    <h3>🗺️ Tracé GPS</h3>
+    <p>Activez le tracé GPS pour enregistrer votre itinéraire et calculer les km parcourus.</p>
+
+    <div class="timeline">
+      <div class="tl-item" style="color:var(--green)">
+        <div class="tl-dot" style="background:var(--green)"></div>
+        <div class="tl-label">Avant de partir — Démarrer l'enregistrement</div>
+        <div class="tl-text">Appuyez sur <em>Démarrer l'enregistrement GPS</em>. Acceptez l'accès à la localisation. Gardez l'appli ouverte en arrière-plan.</div>
+      </div>
+      <div class="tl-item" style="color:var(--sea)">
+        <div class="tl-dot" style="background:var(--sea)"></div>
+        <div class="tl-label">Pendant la prospection</div>
+        <div class="tl-text">Le compteur affiche distance, durée et vitesse en temps réel. Votre parcours est tracé en direct.</div>
+      </div>
+      <div class="tl-item" style="color:var(--red)">
+        <div class="tl-dot" style="background:var(--red)"></div>
+        <div class="tl-label">À la fin — Arrêter et enregistrer</div>
+        <div class="tl-text">Appuyez sur <em>Arrêter et enregistrer</em>. Vos km sont comptabilisés automatiquement dans votre espace.</div>
+      </div>
+    </div>
+
+    <div class="info info-teal">
+      <span class="info-icon">✅</span>
+      <div><strong>Horaires automatiques</strong> Si le tracé GPS est activé, les heures de début et fin sont remplies automatiquement dans le bilan.</div>
+    </div>
+
+    <h3>📸 Observations et photos</h3>
+    <p>Signalez toute observation dès qu'elle se présente. Chaque signalement est indépendant.</p>
+
+    <ul class="steps">
+      <li><div class="step-num">1</div><div class="step-body"><strong>Prenez la photo</strong><p>Appareil photo direct ou import depuis la galerie. La position GPS est enregistrée automatiquement.</p></div></li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Choisissez le type d'observation</strong>
+          <div class="phone-mock" style="margin-top:8px;padding:12px">
+            <div class="mock-tag-row">
+              <span class="mock-tag mock-tag-ok">✅ RAS</span>
+              <span class="mock-tag mock-tag-suspect">⚠️ Suspect</span>
+              <span class="mock-tag mock-tag-turtle">🐢 Trace</span>
+              <span class="mock-tag">👁️ Autre</span>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li><div class="step-num">3</div><div class="step-body"><strong>Ajoutez un commentaire (optionnel)</strong><p>Position, taille, état, contexte. Ces détails sont précieux pour l'équipe scientifique.</p></div></li>
+    </ul>
+
+    <div class="info info-gold">
+      <span class="info-icon">🐢</span>
+      <div><strong>Trace suspecte ou confirmée ?</strong> En cas de doute, choisissez "Trace suspecte". En cas de trace confirmée, appelez immédiatement le RTMMF : <strong>06 16 86 26 86</strong>.</div>
+    </div>
+
+    <h3>📋 Bilan final</h3>
+    <p><strong>À remplir une seule fois, à la fin de la prospection.</strong></p>
+
+    <div class="phone-mock">
+      <div class="mock-label">Bilan final · À remplir en fin de sortie</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+        <div class="mock-btn btn-ghost">✅ Aucune trace</div>
+        <div class="mock-btn btn-ghost">⚠️ Trace suspecte</div>
+        <div class="mock-btn btn-ghost" style="border-color:rgba(78,205,196,.4)">🐢 Trace confirmée !</div>
+        <div class="mock-btn btn-ghost">👁️ Autre</div>
+      </div>
+      <div class="mock-stat-grid-2" style="margin-bottom:10px">
+        <div class="mock-stat"><span class="mock-stat-val">06:30</span><span class="mock-stat-lbl">Heure début</span></div>
+        <div class="mock-stat"><span class="mock-stat-val">08:15</span><span class="mock-stat-lbl">Heure fin</span></div>
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-bottom:10px">Remplies automatiquement si tracé GPS activé</div>
+      <div class="mock-btn btn-teal">📤 Envoyer le bilan</div>
+    </div>
+
+    <h3>✅ Checklist avant de partir</h3>
+    <ul class="checklist">
+      <li><span class="check-icon">👟</span><span>Chaussures fermées adaptées au sable</span></li>
+      <li><span class="check-icon">💧</span><span>Eau et protection solaire</span></li>
+      <li><span class="check-icon">📱</span><span>Smartphone chargé, formulaire terrain ouvert et chargé</span></li>
+      <li><span class="check-icon">🗺️</span><span>Zone de prospection consultée sur la carte</span></li>
+      <li><span class="check-icon">📞</span><span>Numéro du référent enregistré dans votre téléphone</span></li>
+      <li><span class="check-icon">🚮</span><span>Ne laissez rien sur la plage — ramassez vos déchets</span></li>
+      <li><span class="check-icon">🐢</span><span>RTMMF en mémoire : 06 16 86 26 86 (trace confirmée)</span></li>
+    </ul>
+
+  </div></div>
+</section>
+
+<!-- ════════ 6 ════════ -->
+<section class="chapter" id="espace">
+  <div class="chapter-header">
+    <div class="chapter-header-inner">
+      <div class="ch-num">6</div>
+      <div class="ch-icon">🙋</div>
+      <div>
+        <h2>Votre espace bénévole</h2>
+        <p>Historique, badges, attestation et prochaines prospections</p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-body-wrap"><div class="chapter-body">
+
+    <p>Votre espace personnel est accessible sans mot de passe via un <strong>lien de connexion sécurisé</strong> envoyé par email — valable 24 h.</p>
+
+    <div class="two-col">
+      <div><p><strong>Depuis vos emails</strong><br>Chaque email contient un bouton <em>👤 Mon espace</em>. Cliquez dessus pour accéder directement.</p></div>
+      <div><p><strong>Depuis le site</strong><br>Page <em>Espace bénévole</em> → saisissez votre email → <em>Recevoir mon lien</em>. Vérifiez vos spams.</p></div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-box">Votre email</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Lien reçu (24h)</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">Session active 8h</div>
+      <span class="flow-arrow">→</span>
+      <div class="flow-box">✅ Connecté</div>
+    </div>
+
+    <div class="phone-mock">
+      <div style="background:linear-gradient(135deg,#1a5f7a,var(--sea));border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px">
+        <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">😊</div>
+        <div>
+          <div style="color:#fff;font-weight:800;font-size:16px">Bonjour Yann G. 👋</div>
+          <div style="color:rgba(255,255,255,.6);font-size:12px;font-weight:600">yann@email.fr · 🟡 Naturaliste bénévole</div>
+          <div style="color:rgba(255,255,255,.4);font-size:11px;margin-top:2px;font-weight:600">PROGRESSION BADGES 7/10 · Prochain : 🐢 Expert·e</div>
+        </div>
+      </div>
+      <div class="mock-stat-grid" style="margin-bottom:10px">
+        <div class="mock-stat"><span class="mock-stat-val">7</span><span class="mock-stat-lbl">Prospections</span></div>
+        <div class="mock-stat"><span class="mock-stat-val">2</span><span class="mock-stat-lbl">À venir</span></div>
+        <div class="mock-stat"><span class="mock-stat-val">14h</span><span class="mock-stat-lbl">Bénévolat</span></div>
+        <div class="mock-stat"><span class="mock-stat-val">5</span><span class="mock-stat-lbl">Obs.</span></div>
+      </div>
+      <div class="mock-card">
+        <div class="mock-label">🏅 Badges débloqués</div>
+        <div class="mock-tag-row">
+          <span class="mock-tag" style="border-color:rgba(240,192,64,.5);background:rgba(240,192,64,.15);color:#ffd54f">🐣 Premiers pas</span>
+          <span class="mock-tag" style="border-color:rgba(240,192,64,.5);background:rgba(240,192,64,.15);color:#ffd54f">🌊 Habitué·e</span>
+          <span class="mock-tag" style="opacity:.35">🐢 Expert·e</span>
+        </div>
+      </div>
+      <div class="mock-btn btn-green" style="margin-top:8px;margin-bottom:8px">📄 Attestation bénévolat 2026</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="mock-btn btn-wa" style="margin:0">💬 WhatsApp</div>
+        <div class="mock-btn btn-sea" style="margin:0">📖 Guide</div>
+      </div>
+    </div>
+
+    <div class="info info-blue">
+      <span class="info-icon">🔒</span>
+      <div><strong>Connexion sans mot de passe</strong> Le lien est valable <strong>24 heures</strong>, votre session reste active <strong>8 heures</strong>. Si le lien expire, demandez-en un nouveau depuis la page Espace bénévole.</div>
+    </div>
+
+  </div></div>
+</section>
+
+<!-- ════════ 7 ════════ -->
+<section class="chapter" id="badges">
+  <div class="chapter-header">
+    <div class="chapter-header-inner">
+      <div class="ch-num">7</div>
+      <div class="ch-icon">🏅</div>
+      <div>
+        <h2>Système de badges</h2>
+        <p>Récompenses calculées automatiquement — visibles dans votre espace</p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-body-wrap"><div class="chapter-body">
+
+    <p>Les badges se débloquent <strong>automatiquement</strong> au fil de vos prospections, sans aucune saisie manuelle.</p>
+
+    <div class="badges-grid">
+      <div class="badge-card badge-earned"><span class="badge-icon">🐣</span><div class="badge-name">Premiers pas</div><div class="badge-desc">1ère prospection</div></div>
+      <div class="badge-card badge-earned"><span class="badge-icon">🌊</span><div class="badge-name">Habitué·e</div><div class="badge-desc">5 prospections</div></div>
+      <div class="badge-card badge-locked"><span class="badge-icon">🐢</span><div class="badge-name">Expert·e</div><div class="badge-desc">10 prospections</div></div>
+      <div class="badge-card badge-locked"><span class="badge-icon">🦸</span><div class="badge-name">Super-bénévole</div><div class="badge-desc">20 prospections</div></div>
+      <div class="badge-card badge-earned"><span class="badge-icon">🗺️</span><div class="badge-name">Explorateur·ice</div><div class="badge-desc">1er tracé GPS</div></div>
+      <div class="badge-card badge-earned"><span class="badge-icon">🚶</span><div class="badge-name">Marcheur·euse</div><div class="badge-desc">10 km cumulés</div></div>
+      <div class="badge-card badge-locked"><span class="badge-icon">🏃</span><div class="badge-name">Infatigable</div><div class="badge-desc">50 km cumulés</div></div>
+      <div class="badge-card badge-locked"><span class="badge-icon">👁️</span><div class="badge-name">Observateur·ice</div><div class="badge-desc">1ère observation</div></div>
+      <div class="badge-card badge-locked"><span class="badge-icon">🔍</span><div class="badge-name">Découvreur·euse</div><div class="badge-desc">Trace confirmée !</div></div>
+      <div class="badge-card badge-locked"><span class="badge-icon">⭐</span><div class="badge-name">Fidèle</div><div class="badge-desc">2 saisons ou +</div></div>
+    </div>
+
+    <div class="info info-gold">
+      <span class="info-icon">💡</span>
+      <div><strong>Dorés = débloqués · Grisés = à conquérir.</strong> Activez le tracé GPS à chaque sortie (badges distance). Soumettez des observations (badges exploration).</div>
+    </div>
+
+  </div></div>
+</section>
+
+<!-- ════════ 8 ════════ -->
+<section class="chapter" id="attestation">
+  <div class="chapter-header">
+    <div class="chapter-header-inner">
+      <div class="ch-num">8</div>
+      <div class="ch-icon">📄</div>
+      <div>
+        <h2>Attestation de bénévolat</h2>
+        <p>Document officiel téléchargeable depuis votre espace</p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-body-wrap"><div class="chapter-body">
+
+    <p>Une attestation officielle est générée <strong>automatiquement</strong> chaque année pour toute personne ayant réalisé au moins une prospection.</p>
+
+    <ul class="steps">
+      <li><div class="step-num">1</div><div class="step-body"><strong>Connectez-vous à votre espace bénévole</strong><p>Via le lien dans votre email ou depuis la page Espace bénévole du site.</p></div></li>
+      <li><div class="step-num">2</div><div class="step-body"><strong>Section "Attestation de bénévolat"</strong><p>Cliquez sur le bouton vert <em>📄 Attestation saison 2026</em>.</p></div></li>
+      <li><div class="step-num">3</div><div class="step-body"><strong>Téléchargez ou imprimez le PDF</strong><p>Le document s'ouvre dans votre navigateur. Enregistrez-le ou imprimez-le selon vos besoins.</p></div></li>
+    </ul>
+
+    <div class="info info-blue">
+      <span class="info-icon">📅</span>
+      <div><strong>Disponibilité</strong> L'attestation est générée dès votre première prospection réalisée. L'attestation de la saison N-1 est également accessible.</div>
+    </div>
+
+  </div></div>
+</section>
+
+<!-- ════════ 9 ════════ -->
+<section class="chapter" id="contacts">
+  <div class="chapter-header">
+    <div class="chapter-header-inner">
+      <div class="ch-num">9</div>
+      <div class="ch-icon">📞</div>
+      <div>
+        <h2>Contacts utiles</h2>
+        <p>Association, urgences terrain, groupe bénévoles</p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-body-wrap"><div class="chapter-body">
+
+    <div class="contact-card" style="border-color:#25d366;background:linear-gradient(135deg,#f0fff7,#e8faf0)">
+      <div class="contact-icon">💬</div>
+      <div style="flex:1">
+        <div class="contact-name" style="color:#1a7a44">Groupe WhatsApp bénévoles</div>
+        <div class="contact-detail">Annonces, échanges et infos de terrain en temps réel</div>
+      </div>
+      <a href="https://chat.whatsapp.com/E6XzXU3n86MDmIHpzJ7XvR" target="_blank" rel="noopener" class="contact-action-wa">Rejoindre</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">🐢</div>
+      <div>
+        <div class="contact-name">Sauvegarde Hérault Littoral</div>
+        <div class="contact-detail">Association — questions générales, inscriptions</div>
+        <a class="contact-tel" href="tel:0423500338">04 23 50 03 38</a>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">🆘</div>
+      <div>
+        <div class="contact-name">RTMMF – Réseau Tortues Marines</div>
+        <div class="contact-detail">Signalement tortue blessée ou trace confirmée</div>
+        <a class="contact-tel contact-tel-red" href="tel:0616862686">06 16 86 26 86</a>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">📖</div>
+      <div style="flex:1">
+        <div class="contact-name">Ce guide en ligne</div>
+        <div class="contact-detail">Toujours à jour — accessible depuis vos emails et la nav mobile</div>
+      </div>
+      <a href="https://ashl.fr//wp-content/plugins/planning-prospections-tortues/GUIDE_BENEVOLES.html" target="_blank" rel="noopener" class="contact-action">Consulter</a>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-icon">🏠</div>
+      <div>
+        <div class="contact-name">Adresse de l'association</div>
+        <div class="contact-detail">1 rue Kléber · 34410 Sérignan</div>
+      </div>
+    </div>
+
+    <div class="info info-red">
+      <span class="info-icon">🚨</span>
+      <div><strong>Urgence sur le terrain</strong> Accident ou personne en danger : <strong>15 / 18 / 112</strong> selon le cas, puis RTMMF : <strong>06 16 86 26 86</strong>.</div>
+    </div>
+
+  </div></div>
+</section>
+
+<!-- ════════ 10 ════════ -->
+<section class="chapter" id="faq">
+  <div class="chapter-header">
+    <div class="chapter-header-inner">
+      <div class="ch-num">10</div>
+      <div class="ch-icon">❓</div>
+      <div>
+        <h2>Questions fréquentes</h2>
+        <p>Tout ce que vous vous demandez, répondu</p>
+      </div>
+    </div>
+  </div>
+  <div class="chapter-body-wrap"><div class="chapter-body">
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-mark">?</span>Je n'ai pas reçu l'email de confirmation ?</div>
+      <div class="faq-a">Vérifiez votre dossier <strong>spam</strong>. L'expéditeur est <em>Sauvegarde Hérault Littoral</em>. Si toujours rien après 10 minutes, appelez le 04 23 50 03 38.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-mark">?</span>Le créneau était complet — suis-je bien sur liste d'attente ?</div>
+      <div class="faq-a">Oui. Vous recevrez un email de confirmation. En cas de désistement, vous avez <strong>24 heures</strong> pour confirmer, sinon la place est proposée au suivant.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-mark">?</span>La prospection est annulée pour la météo — que dois-je faire ?</div>
+      <div class="faq-a">Rien ! Email automatique, inscription supprimée. Consultez le planning pour vous réinscrire.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-mark">?</span>Comment accéder à mon espace sans lien en main ?</div>
+      <div class="faq-a">Page <em>Espace bénévole</em> du site → votre email → <em>Recevoir mon lien</em>. Vérifiez vos spams si vous ne le recevez pas en 2 minutes.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-mark">?</span>Le formulaire terrain ne s'ouvre pas sur la plage</div>
+      <div class="faq-a">Ouvrez le lien terrain <strong>avant de partir</strong>, à la maison avec du réseau. Une fois chargé, il fonctionne même hors connexion. Le GPS ne nécessite pas de données mobiles.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-mark">?</span>Puis-je voir la zone de prospection avant de m'inscrire ?</div>
+      <div class="faq-a">Oui ! Dans la fiche du créneau, le bouton <em>🏖️ Voir la zone de prospection</em> affiche la carte du secteur si l'administrateur l'a défini.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-mark">?</span>Mes heures sont-elles calculées automatiquement ?</div>
+      <div class="faq-a">Si vous activez le tracé GPS, les heures sont enregistrées automatiquement. Sans tracé, 2 heures par défaut sont appliquées dans l'attestation.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-mark">?</span>J'ai trouvé une trace de tortue — que faire ?</div>
+      <div class="faq-a">
+        1. <strong>Photographiez sans toucher</strong> ni déplacer.<br>
+        2. Position GPS capturée automatiquement dans le formulaire.<br>
+        3. Sélectionnez <em>🐢 Trace confirmée</em> dans le bilan.<br>
+        4. Appelez <strong>immédiatement</strong> le RTMMF : <strong>06 16 86 26 86</strong>.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-mark">?</span>Comment activer le mode sombre ?</div>
+      <div class="faq-a">Le guide suit automatiquement les réglages système. Sur le calendrier du site, le bouton 🌙 dans le header bascule manuellement.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-mark">?</span>Puis-je faire une prospection hors planning ?</div>
+      <div class="faq-a">Oui ! Cliquez <em>Déclarer une prospection hors planning</em> sur la page planning. Vos données s'intègrent à vos statistiques et à votre attestation.</div>
+    </div>
+
+  </div></div>
+</section>
+
+</div><!-- .guide-body -->
+
+<footer>
+  <img src="https://ashl.fr/wp-content/uploads/2025/03/Copie-de-Copie-de-Sans-titre-297-x-210-mm-6-300x212.png"
+       alt="SHL"
+       style="height:46px;display:block;margin:0 auto 14px;opacity:.6;border-radius:8px"
+       onerror="this.style.display='none'">
+  <strong>Sauvegarde Hérault Littoral</strong>
+  1 rue Kléber · 34410 Sérignan · 04 23 50 03 38
+
+  <div class="footer-links">
+    <a href="https://chat.whatsapp.com/E6XzXU3n86MDmIHpzJ7XvR" target="_blank" rel="noopener" class="footer-link footer-link-wa">💬 Groupe WhatsApp</a>
+    <a href="https://ashl.fr//wp-content/plugins/planning-prospections-tortues/GUIDE_BENEVOLES.html" class="footer-link footer-link-sea">📖 Ce guide en ligne</a>
+  </div>
+
+  <div style="margin-top:14px;font-size:12px;opacity:.45">
+    Guide bénévoles v2.1.0 · Mis à jour le 20 juin 2026
+  </div>
+</footer>
+
+</body>
+</html>

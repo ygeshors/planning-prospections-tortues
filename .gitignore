@@ -1,0 +1,19 @@
+# Artefacts de build
+*.zip
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# WordPress (si déployé localement)
+wp-config.php
+
+# Dépendances Node (si ajout futur)
+node_modules/
